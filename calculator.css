@@ -1,0 +1,51 @@
+html {
+    background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+body {
+    border: solid 1px slategrey;
+    display: grid;
+
+}
+
+.containerNumeri {
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 50vh;
+    height: 50vh;
+    gap: 10px;    
+}
+.containerOperatori {
+    grid-column: 1/4;    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    
+}
+
+.bottoniNumeri {
+    padding: 10px;
+    border: solid 1px;
+    background-color: gray;
+}
+.bottoniOperatori {
+    padding: 10px;
+    border: solid 1px; 
+    background-color: orange;  
+
+}
+
+#zero {    
+    grid-column: 2;
+
+}
+#uguale {
+    grid-column: 2/5;
+}
+
+#display { 
+    border: solid blue;  
+    grid-column: 1/4;
+    padding-bottom: 30px;
+    
+}
