@@ -30,30 +30,54 @@ function operate (operator,n1,n2) {
 }
 
 let displayvalue = ''
+let primoNumero = ''
+let secondoNumero = ''
+let operatore = ''
 
-//getButtons
+//getButtons e event listener
 const numeri = document.querySelectorAll('.bottoniNumeri')
 numeri.forEach((bottone) => {
     bottone.addEventListener('click',pressed)
 })
+//getoperator buttons and event listeners
+const operatori = document.querySelectorAll('.operatori')
+operatori.forEach((bottone) => {
+    bottone.addEventListener('click',pressed)
+})
+
 //getDisplay
 const display = document.querySelector('#display')
 //getclearButton
 const clear = document.querySelector('#clear')
+
 clear.addEventListener('click',clearDisplay)
+
+//get Equalbutton
+const uguale = document.querySelector('#uguale')
+uguale.addEventListener('click',prova)
 
 
 function pressed() { 
     displayvalue +=  this.innerText 
-    console.log(displayvalue)
-    updateDisplay()
+    console.dir(displayvalue)
+    updateDisplay()    
 }
 
 function clearDisplay() {
-    displayvalue = '0'
+    displayvalue = ''
     updateDisplay()   
 }
 function updateDisplay() {
     display.innerText = displayvalue
-
 }
+function prova () {
+    displayvalue = getMathematicalValue(displayvalue)
+    updateDisplay()
+    
+}
+
+function getMathematicalValue(str) {
+    return new Function('return ' + str)();    
+}
+
+
