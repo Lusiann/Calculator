@@ -54,6 +54,9 @@ function pressedButton() {
     if (displayvalue === '0') {
         displayvalue = ''
     }
+    if (displayvalue === result) {
+        displayvalue = ''
+    }
     displayvalue += + this.innerText
     console.log(displayvalue)    
     updateDisplay()    
