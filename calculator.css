@@ -27,11 +27,14 @@ body {
     padding: 10px;
     border: solid 1px;
     background-color: gray;
+    cursor: pointer;
+    
 }
 .bottoniOperatori {
     padding: 10px;
     border: solid 1px; 
-    background-color: orange;  
+    background-color: orange; 
+    cursor: pointer; 
 
 }
 
@@ -47,5 +50,13 @@ body {
     border: solid blue;  
     grid-column: 1/4;
     padding-bottom: 30px;
+    overflow: hidden;
+    
+}
+#displayPending { 
+    border: solid blue;  
+    grid-column: 1/4;
+    padding-bottom: 30px;
+    overflow: hidden;
     
 }

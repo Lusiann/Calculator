@@ -1,4 +1,4 @@
-function add(n1,n2) {
+/* function add(n1,n2) {
     return n1+n2
 }
 function subtract(n1,n2) {
@@ -27,53 +27,72 @@ function operate (operator,n1,n2) {
             break;
     }
 
-}
-
-let displayvalue = ''
-let primoNumero = ''
-let secondoNumero = ''
-let operatore = ''
-
-//getButtons e event listener
+} */
 const numeri = document.querySelectorAll('.bottoniNumeri')
-numeri.forEach((bottone) => {
-    bottone.addEventListener('click',pressed)
-})
-//getoperator buttons and event listeners
 const operatori = document.querySelectorAll('.operatori')
-operatori.forEach((bottone) => {
-    bottone.addEventListener('click',pressed)
-})
-
-//getDisplay
 const display = document.querySelector('#display')
-//getclearButton
+const displayPreviousElement = document.querySelector('#displayPending')
 const clear = document.querySelector('#clear')
-
-clear.addEventListener('click',clearDisplay)
-
-//get Equalbutton
 const uguale = document.querySelector('#uguale')
-uguale.addEventListener('click',prova)
+
+let displayvalue = '0'
+let displayPrevious = ''
+let currentOperatore = ''
+let result = undefined
 
 
-function pressed() { 
-    displayvalue +=  this.innerText 
-    console.dir(displayvalue)
+numeri.forEach((bottone) => {
+    bottone.addEventListener('click',pressedButton)
+})
+operatori.forEach((bottone) => {
+    bottone.addEventListener('click',pressedOperator)
+})
+clear.addEventListener('click',clearDisplay)
+uguale.addEventListener('click',operate)
+
+function pressedButton() { 
+    if (displayvalue === '0') {
+        displayvalue = ''
+    }
+    displayvalue += + this.innerText
+    console.log(displayvalue)    
     updateDisplay()    
 }
+function pressedOperator () {
+    if (/[+-\/*].$/.test(displayvalue)) {
+        return;
+    } else {
+        operatore = this.innerText
+        displayvalue += ' ' + operatore + ' '   
+        updateDisplay()
+    }  
 
+}
 function clearDisplay() {
-    displayvalue = ''
+    displayPrevious = ''
+    displayvalue = '0'
+    operatore = ''
+    result = undefined
     updateDisplay()   
 }
 function updateDisplay() {
     display.innerText = displayvalue
+    if (result) {
+        displayPreviousElement.innerText = displayPrevious + ' = ' + result
+    } else {
+        displayPreviousElement.innerText = displayPrevious
+    }
+       
 }
-function prova () {
-    displayvalue = getMathematicalValue(displayvalue)
-    updateDisplay()
-    
+function operate () {
+    debugger
+    if (displayvalue === result) {
+        return
+    }
+    displayPrevious = displayvalue    
+    result = getMathematicalValue(displayvalue)
+    displayvalue = result    
+    updateDisplay()   
 }
 
 function getMathematicalValue(str) {
