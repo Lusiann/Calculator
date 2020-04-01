@@ -28,6 +28,7 @@ function operate (operator,n1,n2) {
     }
 
 } */
+const decimale = document.querySelector('#decimale')
 const numeri = document.querySelectorAll('.bottoniNumeri')
 const operatori = document.querySelectorAll('.operatori')
 const display = document.querySelector('#display')
@@ -35,12 +36,14 @@ const displayPreviousElement = document.querySelector('#displayPending')
 const clear = document.querySelector('#clear')
 const uguale = document.querySelector('#uguale')
 
+
 let displayvalue = '0'
 let displayPrevious = ''
 let currentOperatore = ''
 let result = undefined
+let decimabutton = true;
 
-
+decimale.addEventListener('click', pressedDecimal)
 numeri.forEach((bottone) => {
     bottone.addEventListener('click',pressedButton)
 })
@@ -57,25 +60,39 @@ function pressedButton() {
     if (displayvalue === result) {
         displayvalue = ''
     }
-    displayvalue += + this.innerText
+    displayvalue +=  this.innerText
     console.log(displayvalue)    
     updateDisplay()    
 }
-function pressedOperator () {
-    if (/[+-\/*].$/.test(displayvalue)) {
+
+function pressedOperator () {    
+    if (/[+-\/*] $/.test(displayvalue)) {
         return;
     } else {
+        decimabutton = true;
         operatore = this.innerText
         displayvalue += ' ' + operatore + ' '   
         updateDisplay()
     }  
 
 }
+
+function pressedDecimal() { 
+    if (decimabutton) {
+        pressedButton.call(this)
+        decimabutton = false;
+    } else {
+        return;
+    }         
+    
+}
+
 function clearDisplay() {
     displayPrevious = ''
     displayvalue = '0'
     operatore = ''
     result = undefined
+    decimabutton = true;
     updateDisplay()   
 }
 function updateDisplay() {
@@ -92,8 +109,14 @@ function operate () {
     if (displayvalue === result) {
         return
     }
-    displayPrevious = displayvalue    
+    if ((/[+-\/*] $/.test(displayvalue))) {
+        return;
+    } else {
+        displayPrevious = displayvalue 
+    }
+       
     result = getMathematicalValue(displayvalue)
+    result =  Math.floor(result * 100) / 100
     displayvalue = result    
     updateDisplay()   
 }

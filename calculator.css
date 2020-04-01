@@ -23,6 +23,13 @@ body {
     
 }
 
+#decimale {
+    padding: 10px;
+    border: solid 1px;
+    background-color: gray;
+    cursor: pointer;
+}
+
 .bottoniNumeri {
     padding: 10px;
     border: solid 1px;
