@@ -1,25 +1,40 @@
 html {
     background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    font-family: 'Press Start 2P';
 }
-body {
-    border: solid 1px slategrey;
-    display: grid;
 
+body {
+    margin: 0;
+  }
+
+
+#megacontenitore {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
 }
 
 .containerNumeri {
-    border: 1px solid red;
+    padding: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 50vh;
+    min-width: 450px;
+    min-height: 450px;
+    width: 50vh ;
     height: 50vh;
     gap: 10px;    
+    background-color: lightgray;
+    text-align: center;
+    
+    
 }
 .containerOperatori {
     grid-column: 1/4;    
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 10px;
+    
     
 }
 
@@ -28,6 +43,7 @@ body {
     border: solid 1px;
     background-color: gray;
     cursor: pointer;
+    border-radius: 20px;
 }
 
 .bottoniNumeri {
@@ -35,13 +51,14 @@ body {
     border: solid 1px;
     background-color: gray;
     cursor: pointer;
-    
+    border-radius: 20px;
 }
 .bottoniOperatori {
     padding: 10px;
     border: solid 1px; 
     background-color: orange; 
-    cursor: pointer; 
+    cursor: pointer;
+    border-radius: 20px; 
 
 }
 
@@ -50,20 +67,36 @@ body {
 
 }
 #uguale {
-    grid-column: 2/5;
+    grid-column: 3/5;
 }
 
 #display { 
-    border: solid blue;  
+    background-color: #ADB391;
+    border: solid blue 1px;  
+    border-top: 0 ;
     grid-column: 1/4;
     padding-bottom: 30px;
     overflow: hidden;
+    text-align: left;
+    padding: 10px;
+    font-size: large ;
+    margin-top: -10px;
+    min-height: 30px;
+    
     
 }
-#displayPending { 
-    border: solid blue;  
+#displayPending {
+    background-color: #ADB391; 
+    border: solid blue 1px;  
+    border-bottom: 0 ;
     grid-column: 1/4;
     padding-bottom: 30px;
     overflow: hidden;
+    padding: 10px;
+    text-align: left;
+    color: #00000091;
+    font-size: smaller ;
+    min-height: 10px;
+    
     
 }

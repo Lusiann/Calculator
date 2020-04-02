@@ -34,7 +34,11 @@ const operatori = document.querySelectorAll('.operatori')
 const display = document.querySelector('#display')
 const displayPreviousElement = document.querySelector('#displayPending')
 const clear = document.querySelector('#clear')
+const cancella = document.querySelector('#cancella')
 const uguale = document.querySelector('#uguale')
+const divcontenitore = document.querySelector('.containerNumeri')
+const megacontenitore = document.querySelector('#megacontenitore')
+
 
 
 let displayvalue = '0'
@@ -51,7 +55,10 @@ operatori.forEach((bottone) => {
     bottone.addEventListener('click',pressedOperator)
 })
 clear.addEventListener('click',clearDisplay)
+cancella.addEventListener('click', cancellaDisplay)
 uguale.addEventListener('click',operate)
+megacontenitore.addEventListener('mousemove', shadow)
+
 
 function pressedButton() { 
     if (displayvalue === '0') {
@@ -66,12 +73,12 @@ function pressedButton() {
 }
 
 function pressedOperator () {    
-    if (/[+-\/*] $/.test(displayvalue)) {
+    if (/[+-x:] $/.test(displayvalue)) {
         return;
     } else {
         decimabutton = true;
         operatore = this.innerText
-        displayvalue += ' ' + operatore + ' '   
+        displayvalue += ' ' + operatore + ' '  
         updateDisplay()
     }  
 
@@ -95,8 +102,20 @@ function clearDisplay() {
     decimabutton = true;
     updateDisplay()   
 }
+
+function cancellaDisplay() {
+    let displayLength = displayvalue.length
+    if( displayvalue.match(/ $/) ) {
+        displayLength = displayLength -1      
+    }    
+    displayvalue = displayvalue.slice(0,displayLength-1)
+    console.log(displayvalue)
+    updateDisplay()
+}
+
 function updateDisplay() {
     display.innerText = displayvalue
+
     if (result) {
         displayPreviousElement.innerText = displayPrevious + ' = ' + result
     } else {
@@ -105,14 +124,25 @@ function updateDisplay() {
        
 }
 function operate () {
-    debugger
     if (displayvalue === result) {
         return
     }
+    if (displayvalue.match(': 0')){
+        alert('SNARKY ERROR MESSAGE')
+        return
+    }
+    
+    displayvalue = displayvalue.replace(/:/g,'/')
+    displayvalue = displayvalue.replace(/x/g,'*')
+    
+   
     if ((/[+-\/*] $/.test(displayvalue))) {
         return;
     } else {
         displayPrevious = displayvalue 
+        displayPrevious = displayPrevious.replace(/\//g,':')
+        displayPrevious = displayPrevious.replace(/\*/g,'x')
+
     }
        
     result = getMathematicalValue(displayvalue)
@@ -123,6 +153,26 @@ function operate () {
 
 function getMathematicalValue(str) {
     return new Function('return ' + str)();    
+}
+
+
+
+function shadow (e) {
+    const width = megacontenitore.offsetWidth
+    const height = megacontenitore.offsetHeight
+    let x = e.offsetX;
+    let y = e.offsetY;
+    
+    
+    if (this !== e.target) {
+        x = x + e.target.offsetLeft
+        y = y + e.target.offsetTop
+    }
+    
+    const xPasso = (x / width * 30) - (30/2)
+    const yPasso = (y / height * 30) - (30/2)
+    divcontenitore.style.boxShadow = `${xPasso}px ${yPasso}px 20px #808080`    
+
 }
 
 
