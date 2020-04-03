@@ -58,6 +58,86 @@ clear.addEventListener('click',clearDisplay)
 cancella.addEventListener('click', cancellaDisplay)
 uguale.addEventListener('click',operate)
 megacontenitore.addEventListener('mousemove', shadow)
+window.addEventListener('keydown',keyboardpressing)
+
+function keyboardpressing () {
+    if (event.key.match(/[0-9]/)) {
+        switch(event.key){
+            case '0':
+                pressedButton.call(document.getElementById('0'))
+            break;
+
+            case '1':
+                pressedButton.call(document.getElementById('1'))
+            break;
+
+            case '2':
+                pressedButton.call(document.getElementById('2'))
+            break;
+
+            case '3':
+                pressedButton.call(document.getElementById('3'))
+            break;
+
+            case '4':
+                pressedButton.call(document.getElementById('4'))
+            break;
+
+            case '5':
+                pressedButton.call(document.getElementById('5'))
+            break;
+
+            case '6':
+                pressedButton.call(document.getElementById('6'))
+            break;
+
+            case '7':
+                pressedButton.call(document.getElementById('7'))
+            break;
+
+            case '8':
+                pressedButton.call(document.getElementById('8'))
+            break;
+
+            case '9':
+                pressedButton.call(document.getElementById('9'))
+            break;
+        }
+
+    } else if(event.key.match(/\,|\./) ) {
+        pressedDecimal.call(decimale)
+    } else if(event.key.match('Backspace')){
+        cancellaDisplay()
+    } else if(event.key.match(/[+-\/*:x]/)) {
+        switch (event.key) {
+            case '+':
+                pressedOperator.call(document.getElementById('+'))
+            break;
+            
+            case '*':
+            case 'x':
+            case 'X':
+                pressedOperator.call(document.getElementById('x'))
+            break;
+            
+            case '/':
+            case ':':
+                pressedOperator.call(document.getElementById(':'))
+            break;
+
+            case '-':
+                pressedOperator.call(document.getElementById('-'))
+            break;
+        }
+            
+    } else if(event.key.match('Enter')) {
+        operate()
+    } else if (event.key.match('Delete')) {
+        clearDisplay()
+    }
+    
+   
+}
 
 
 function pressedButton() { 
@@ -81,7 +161,7 @@ function pressedOperator () {
         displayvalue += ' ' + operatore + ' '  
         updateDisplay()
     }  
-
+    console.log(displayvalue)
 }
 
 function pressedDecimal() { 
@@ -106,7 +186,10 @@ function clearDisplay() {
 function cancellaDisplay() {
     let displayLength = displayvalue.length
     if( displayvalue.match(/ $/) ) {
-        displayLength = displayLength -1      
+        displayLength = displayLength -2     
+    }
+    if(displayvalue.charAt(displayLength-1).match('.')){
+        decimabutton = true;
     }    
     displayvalue = displayvalue.slice(0,displayLength-1)
     console.log(displayvalue)
@@ -114,8 +197,13 @@ function cancellaDisplay() {
 }
 
 function updateDisplay() {
+    
+    if((/ \./).test(displayvalue)) {
+        displayvalue = displayvalue.replace(/ \./, ' 0.')
+    } else if ((/^\./).test(displayvalue)) {
+        displayvalue = displayvalue.replace(/^\./ , '0.')
+    }    
     display.innerText = displayvalue
-
     if (result) {
         displayPreviousElement.innerText = displayPrevious + ' = ' + result
     } else {
