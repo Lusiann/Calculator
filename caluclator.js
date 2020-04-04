@@ -1,33 +1,4 @@
-/* function add(n1,n2) {
-    return n1+n2
-}
-function subtract(n1,n2) {
-    return n1-n2
-}
-function multiply (n1,n2) {
-    return n1*n2
-}
-function divide (n1,n2) {
-    return n1/n2
-}
 
-function operate (operator,n1,n2) {
-    switch(operator) {
-        case '+':
-            return add(n1,n2)
-            break;
-        case '-':
-            return subtract(n1,n2)
-            break;
-        case 'x':
-            return multiply(n1,n2)
-            break;
-        case ':':
-            return divide(n1,n2)
-            break;
-    }
-
-} */
 const decimale = document.querySelector('#decimale')
 const numeri = document.querySelectorAll('.bottoniNumeri')
 const operatori = document.querySelectorAll('.operatori')
@@ -147,8 +118,7 @@ function pressedButton() {
     if (displayvalue === result) {
         displayvalue = ''
     }
-    displayvalue +=  this.innerText
-    console.log(displayvalue)    
+    displayvalue +=  this.innerText    
     updateDisplay()    
 }
 
@@ -161,7 +131,7 @@ function pressedOperator () {
         displayvalue += ' ' + operatore + ' '  
         updateDisplay()
     }  
-    console.log(displayvalue)
+    
 }
 
 function pressedDecimal() { 
@@ -192,7 +162,6 @@ function cancellaDisplay() {
         decimabutton = true;
     }    
     displayvalue = displayvalue.slice(0,displayLength-1)
-    console.log(displayvalue)
     updateDisplay()
 }
 
@@ -244,7 +213,7 @@ function getMathematicalValue(str) {
 }
 
 
-
+//based on wes bos 30day challenges https://www.youtube.com/watch?v=zaz9gLI-Xac&t=566s
 function shadow (e) {
     const width = megacontenitore.offsetWidth
     const height = megacontenitore.offsetHeight
